@@ -1,7 +1,32 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Login = () => {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+  
+    const savedUser = JSON.parse(localStorage.getItem("user"));
+
+  
+  
+    if (
+      savedUser &&
+      email === savedUser.email &&
+      password === savedUser.password
+    ) {
+      navigate("/profile");
+    } else {
+      alert("Invalid Email or Password");
+    }
+  };
+
+
   return (
    <div className="min-h-screen bg-gray-100 flex justify-center items-center p-5">
    <div className="w-90 h-195 bg-[#F7F8F9] shadow-md p-6">
@@ -27,6 +52,7 @@ const Login = () => {
 
          <input
            type="email"
+           value={email} onChange={(e) => setEmail(e.target.value)}
            placeholder="Enter email address"
            className="w-full border border-gray-300 rounded-md px-4 py-3 outline-none focus:border-violet-600"
          />
@@ -39,19 +65,19 @@ const Login = () => {
 
          <input
            type="password"
+           value={password} onChange={(e) => setPassword(e.target.value)}
            placeholder="Enter password"
            className="w-full border border-gray-300 rounded-md px-4 py-3 outline-none focus:border-violet-600"
          />
        </div>
 
-      <Link to="/profile">
       <button
          type="submit"
+         onClick={handleLogin}
          className="w-full bg-gray-300 text-white font-semibold py-3 rounded-md cursor-pointer hover:bg-gray-400 transition"
        >
          Login
        </button>
-      </Link>
 
      </form>
 

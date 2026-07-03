@@ -2,6 +2,9 @@ import { Camera } from 'lucide-react'
 import React from 'react'
 
 const Profile = () => {
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
   return (
    <div className="min-h-screen bg-gray-100 flex justify-center items-center p-5">
    <div className="w-90 h-195 bg-[#F7F8F9] shadow-md">
@@ -32,11 +35,11 @@ const Profile = () => {
 
          <div>
            <h3 className="text-lg font-bold text-[#1D2226]">
-             Marry Doe
+             {user.fullName}
            </h3>
 
            <p className="text-gray-700">
-             Marry@gmail.com
+             {user.email}
            </p>
          </div>
 
